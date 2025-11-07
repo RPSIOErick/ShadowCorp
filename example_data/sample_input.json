@@ -1,0 +1,8 @@
+{
+"nome": "Maria da Silva",
+"cpf": "123.456.789-10",
+"endereco": "Rua das Flores, 123",
+"idade": 45,
+"diagnostico": "Hipertensão arterial",
+"historico": ["2018: Gripe", "2020: Diabetes tipo 2"]
+}

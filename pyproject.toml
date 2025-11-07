@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "shadowcorp"
+version = "0.1.0"
+description = "Anonimização de Dados Hospitalares — ShadowCorp"
+requires-python = ">=3.11"
+
+
+[project.dependencies]
+fastapi = "^0.100"
+uvicorn = "^0.23"
+sqlalchemy = "^2.0"
+asyncpg = "^0.27"
+psycopg2-binary = "^2.9"
+python-dotenv = "^1.0"
+spacy = "^3.7"
+regex = "^2024"
+pytest = "^7.0"
+httpx = "^0.24"
+[presidio]
+# Observação: Presidio pode requerer instalação separada e modelos.

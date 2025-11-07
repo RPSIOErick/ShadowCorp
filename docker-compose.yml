@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: shadowcorp-db
+    environment:
+      POSTGRES_DB: shadowcorp
+      POSTGRES_USER: shadow
+      POSTGRES_PASSWORD: shadowpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: shadowcorp-web
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://shadow:shadowpass@db:5432/shadowcorp
+    working_dir: /code
+    volumes:
+      - .:/code
+
+volumes:
+  pgdata:
