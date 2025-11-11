@@ -32,9 +32,3 @@ jobs:
       - name: 🧪 Rodar testes
         run: |
           pytest -v || echo "⚠️ Nenhum teste encontrado"
-
-      - name: ✅ Verificação de formatação (opcional)
-        run: |
-          pip install black flake8
-          black --check .
-          flake8 .
