@@ -1,135 +1,146 @@
 # ShadowCorp
 
-Projeto AI + DevOps — Anonimização de Dados Hospitalares
-========================================================
+# Projeto AI + DevOps — Anonimização de Dados Hospitalares
 
 Privacidade e Segurança de Pacientes com Inteligência Artificial e DevOps
 
-
-📋 Descrição do Projeto
------------------------
+## 📋 Descrição do Projeto
 
 O Projeto AI + DevOps: Anonimização de Dados Hospitalares tem como objetivo proteger a privacidade de pacientes em ambientes de saúde, garantindo que dados sensíveis não possam ser utilizados para identificar indivíduos específicos, mesmo após análises estatísticas ou consultas complexas.
 
 A solução utiliza Inteligência Artificial (IA), Machine Learning (ML) e práticas de DevOps para construir um pipeline seguro e automatizado de anonimização de dados, prevenindo o uso indevido dessas informações por empresas externas, como corretoras de seguro, que poderiam explorar dados pessoais para encarecer seguros de vida.
 
+## 🎯 Objetivos Principais
 
-🎯 Objetivos Principais
------------------------
+* Anonimizar dados sensíveis (como CPF, nome, endereço, diagnósticos e histórico clínico);
+* Utilizar IA/ML real para detecção e mascaramento automático de informações pessoais;
+* Aplicar técnicas estatísticas, média ponderada e privacidade diferencial (DP) para evitar reidentificação;
+* Integrar o processo a pipelines DevOps (CI/CD), garantindo privacidade desde o desenvolvimento até a produção;
+* Oferecer uma API segura para consulta de dados agregados e anonimizados;
+* Assegurar conformidade com legislações de proteção de dados, como LGPD e GDPR.
 
-- Anonimizar dados sensíveis (como CPF, nome, endereço, diagnósticos e histórico clínico);
-- Utilizar IA/ML para detecção e mascaramento automático de informações pessoais;
-- Aplicar técnicas estatísticas e de privacidade diferencial para evitar reidentificação;
-- Integrar o processo a pipelines DevOps (CI/CD), garantindo privacidade desde o desenvolvimento até a produção;
-- Oferecer uma API segura para consulta de dados agregados e anonimizados;
-- Assegurar conformidade com legislações de proteção de dados, como LGPD e GDPR.
+## 🏗️ Estrutura do Projeto
 
+```
+shadowcorp/
+├── app/
+│   ├── main.py                  # Ponto de entrada da API
+│   ├── api/
+│   │   └── v1/
+│   │       ├── routes.py        # Rotas da API
+│   │       └── schemas.py       # Modelos Pydantic
+│   ├── anonymizer/
+│   │   ├── detector.py          # Detecção de PII
+│   │   ├── transformer.py       # Anonimização com ML
+│   │   ├── dp.py                # Ruído diferencial (DP)
+│   │   └── train_model.py       # Treinamento do modelo ML
+│   ├── core/
+│   │   ├── config.py
+│   │   └── security.py
+│   ├── db/
+│   │   ├── base.py
+│   │   └── models.py
+│   └── tests/
+│       └── test_anonymizer.py
+├── example_data/
+│   └── sample_input.json
+├── pyproject.toml
+├── README.md
+└── .github/
+    └── workflows/
+        └── ci-cd.yml
+```
 
-🏗️ Arquitetura da Solução
--------------------------
+## 🧩 Tecnologias Utilizadas
 
-Coleta de Dados Hospitalares (JSON) 
-  ↓
-Pipeline DevOps Seguro 
-  ↓
-Camada de IA de Anonimização 
-  ↓
-Base de Dados Anonimizada 
-  ↓
-API de Consulta Agregada 
-  ↓
-Usuários Autorizados / Pesquisadores
+* Linguagem Principal: Python 3.x
+* Framework de ML: Scikit-Learn (Regressão Logística)
+* NLP / Detecção de Dados Sensíveis: spaCy, Regex
+* DevOps: GitHub Actions (CI/CD)
+* Banco de Dados: PostgreSQL / MongoDB (anonimizado)
+* Segurança: Differential Privacy, Hashing, Tokenização
+* API: FastAPI
+* Monitoramento: Prometheus + Grafana
 
-DevOps Pipeline:
-  - CI/CD Automático
-  - Testes de Privacidade
-  - Monitoramento e Logs Seguros
+## ⚙️ Como Rodar o Projeto
 
+1. Clone o repositório e entre na pasta raiz (`ShadowCorp`).
+2. Crie e ative o ambiente virtual:
 
-🧩 Tecnologias Utilizadas
--------------------------
+```bash
+python -m venv venv
+venv\Scripts\activate  # Windows
+# ou
+source venv/bin/activate  # Linux/Mac
+```
 
-Linguagem Principal: Python 3.x  
-Framework de IA: TensorFlow / PyTorch / Scikit-Learn  
-NLP / Detecção de Dados Sensíveis: spaCy, Presidio (Microsoft), Regex  
-DevOps: Docker, GitHub Actions, Jenkins  
-Infraestrutura: Kubernetes / Terraform  
-Banco de Dados: PostgreSQL / MongoDB (anonimizado)  
-Segurança: Differential Privacy, Hashing, Tokenização  
-API: FastAPI / Flask  
-Monitoramento: Prometheus + Grafana
+3. Instale as dependências:
 
+```bash
+pip install -r requirements.txt
+```
 
-⚙️ Fluxo de Funcionamento
--------------------------
+4. Execute a API **a partir da raiz do projeto** usando:
 
-1. Entrada de Dados: O sistema recebe arquivos JSON contendo dados hospitalares.
-2. Detecção Automática de Dados Sensíveis: Algoritmos de IA e NLP identificam campos como nome, CPF, telefone, endereço e informações médicas diretas.
-3. Anonimização: Aplicação de técnicas como masking, tokenização, ruído estatístico e privacidade diferencial.
-4. Validação: O sistema avalia o risco de reidentificação antes de liberar os dados.
-5. Publicação: Dados anonimizados são armazenados em banco seguro e disponibilizados por meio de uma API agregada.
-6. Auditoria Contínua: Pipelines DevOps automatizam testes de segurança e conformidade a cada atualização.
+```bash
+python -m app.main
+```
 
+Isso garante que o Python reconheça `app` como módulo e consiga importar todos os pacotes internos.
 
-📡 Exemplo de Entrada e Saída
------------------------------
+5. Acesse a API no navegador ou via HTTP client:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+para usar o Swagger UI e testar a rota `/anonimize`.
+
+## 📡 Exemplo de Entrada e Saída
 
 Entrada (JSON Original):
+
+```json
 {
-  "nome": "Maria da Silva",
-  "cpf": "123.456.789-10",
-  "endereco": "Rua das Flores, 123",
-  "idade": 45,
-  "diagnostico": "Hipertensão arterial",
-  "historico": ["2018: Gripe", "2020: Diabetes tipo 2"]
+  "nome": "João Silva",
+  "idade": 40,
+  "cpf": "111.333.222-66",
+  "endereco": "Rua Carlos Sampaio",
+  "diagnostico": "Diabetes"
 }
+```
 
 Saída (JSON Anonimizado):
+
+```json
 {
-  "paciente_id": "anon_5a3f21",
-  "faixa_etaria": "40-50",
-  "diagnostico_categoria": "Doença cardiovascular",
-  "historico": ["2018: Infecção leve", "2020: Doença crônica"],
-  "regiao": "Zona Urbana - Sul"
+  "paciente_id": "anon_5a1889e2",
+  "faixa_etaria": "40-49",
+  "diagnostico_categoria": "Doença metabólica",
+  "modelo_usado": "Regressão Logística real + média ponderada + DP + autoaprendizado"
 }
+```
 
+## 🔄 Integração com DevOps
 
-🔄 Integração com DevOps
-------------------------
+* CI/CD: Automatização via GitHub Actions para testes e deploys.
+* Verificação Automática: Scripts que bloqueiam a inserção de dados não anonimizados.
+* Logs Seguros: Nenhum log contém dados identificáveis.
+* Infraestrutura como Código: Terraform e Kubernetes para ambientes replicáveis e seguros.
 
-- CI/CD: Automatização via GitHub Actions ou Jenkins para testes e deploys.
-- Verificação Automática: Scripts que bloqueiam a inserção de dados não anonimizados.
-- Logs Seguros: Nenhum log contém dados identificáveis.
-- Infraestrutura como Código: Terraform e Kubernetes para ambientes replicáveis e seguros.
+## 📜 Conformidade Legal
 
+* LGPD (Brasil)
+* GDPR (UE)
+* HIPAA (EUA) como referência
 
-📜 Conformidade Legal
----------------------
-
-Este projeto segue as diretrizes da:
-- LGPD (Lei Geral de Proteção de Dados - Brasil)
-- GDPR (General Data Protection Regulation - União Europeia)
-- HIPAA (Health Insurance Portability and Accountability Act - EUA) como referência.
-
-
-🤝 Contribuições
-----------------
-
-Sinta-se à vontade para contribuir!
-Abra uma issue ou envie um pull request com melhorias, correções ou novas ideias de anonimização e segurança.
-
-
-⚠️ Aviso Importante
--------------------
+## ⚠️ Aviso Importante
 
 Este projeto é educacional e experimental.
-Ele não deve ser usado em produção sem auditoria legal e técnica adequada.
-O objetivo é promover consciência e práticas éticas no uso de IA e DevOps para a proteção de dados pessoais em saúde.
+Não deve ser usado em produção sem auditoria legal e técnica adequada.
 
+## 👥 Autores
 
-👥 Autores
------------
-
-- Eliel Godoy   |
-- Erick Bastos  |— Desenvolvedores e Pesquisadores em IA + DevOps
-- Victor Roma   |
+* Eliel Godoy
+* Erick Bastos
+* Victor Roma
